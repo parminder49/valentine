@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Valentine</title>
+<style>
+body {
+  text-align: center;
+  font-family: 'Georgia', serif;
+  background: linear-gradient(#ffb6c1, #ff69b4);
+  color: white;
+  overflow: hidden;
+}
+
+/* Her photo */
+#photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 5px solid white;
+  margin-top: 20px;
+}
+
+/* Buttons */
+#yesBtn {
+  font-size: 20px;
+  padding: 15px 30px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  transition: 0.3s;
+}
+
+#noBtn {
+  font-size: 20px;
+  padding: 15px 30px;
+  background: white;
+  color: black;
+  border: none;
+  border-radius: 15px;
+  position: absolute;
+}
+
+/* Container */
+#container {
+  position: relative;
+  height: 300px;
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  bottom: -50px;
+  font-size: 30px;
+  animation: floatUp 5s linear infinite;
+}
+
+@keyframes floatUp {
+  0% { bottom: -50px; opacity: 1; }
+  100% { bottom: 100vh; opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background music -->
+<audio autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
+<img id="photo" src="her.jpg">
+
+<h1>Vania, will you be my girlfriend? 💞</h1>
+
+<div id="container">
+  <button id="yesBtn" onclick="sayYes()">Yes 💕</button>
+  <button id="noBtn" onmouseover="moveNo()">No 😢</button>
+</div>
+
+<script>
+let yesSize = 20;
+
+// Move No button + make Yes bigger
+function moveNo() {
+  let x = Math.random() * 300;
+  let y = Math.random() * 200;
+
+  document.getElementById("noBtn").style.left = x + "px";
+  document.getElementById("noBtn").style.top = y + "px";
+
+  yesSize += 10;
+  document.getElementById("yesBtn").style.fontSize = yesSize + "px";
+}
+
+// Final romantic screen
+function sayYes() {
+  document.body.innerHTML = `
+  <img src="her.jpg" style="width:180px;border-radius:50%;border:5px solid white;">
+  <h1>YAYYY Vania! 💍❤️</h1>
+  <h2>You just became my Valentine forever!</h2>
+  <p>You are my favourite person, my peace, my smile, my heart 💞</p>
+  `;
+}
+
+// Create floating hearts
+setInterval(function() {
+  let heart = document.createElement("div");
+  heart.innerHTML = "❤️";
+  heart.className = "heart";
+  heart.style.left = Math.random() * window.innerWidth + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 5000);
+}, 800);
+</script>
+
+</body>
+</html>
