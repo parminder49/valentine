@@ -2,152 +2,165 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>My Valentine 💖</title>
+<title>For Arshiii ❤️</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap');
-
 body {
   margin: 0;
   height: 100vh;
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
-  background:
-    linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-    url('her.jpg') center/cover no-repeat;
+  font-family: 'Georgia', serif;
+  background: linear-gradient(180deg, #ff9a9e, #fad0c4);
   color: white;
+  text-align: center;
   overflow: hidden;
 }
 
-/* Blur overlay */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  backdrop-filter: blur(8px);
-  z-index: -1;
+.container {
+  margin-top: 60px;
 }
 
-/* Photo */
 #photo {
-  width: 190px;
-  height: 190px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   border: 5px solid white;
-  margin-top: 40px;
-  box-shadow: 0 0 30px rgba(255,255,255,0.7);
+  object-fit: cover;
 }
 
-/* Headings */
 h1 {
-  font-family: 'Great Vibes', cursive;
-  font-size: 48px;
-  margin: 20px 0 10px;
+  margin-top: 20px;
+  font-weight: normal;
 }
 
-h2 {
-  font-weight: 300;
-  margin-bottom: 30px;
+.buttons {
+  margin-top: 25px;
+  position: relative;
+  height: 120px;
 }
 
-/* Buttons */
-button {
-  font-size: 20px;
-  padding: 15px 35px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-}
-
-#yesBtn {
-  background: #ff3366;
+.yes {
+  font-size: 18px;
+  padding: 14px 32px;
+  background: #ff1e56;
   color: white;
-  box-shadow: 0 0 20px rgba(255,51,102,0.8);
-  transition: 0.3s;
+  border: none;
+  border-radius: 18px;
+  transition: all 0.3s ease;
 }
 
-#noBtn {
+.no {
+  font-size: 18px;
+  padding: 14px 32px;
   background: white;
   color: black;
+  border: none;
+  border-radius: 18px;
   position: absolute;
+  margin-left: 10px;
 }
 
-/* Container */
-#container {
-  position: relative;
-  height: 300px;
+#warmText {
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: 0;
+  transition: all 0.4s ease;
+  color: #fff0f5;
 }
 
-/* Hearts */
+/* Floating hearts */
 .heart {
   position: absolute;
-  bottom: -50px;
-  font-size: 28px;
-  animation: floatUp 6s linear infinite;
+  bottom: -40px;
+  font-size: 24px;
+  animation: floatUp 6s linear forwards;
 }
 
 @keyframes floatUp {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-120vh); opacity: 0; }
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- Punjabi song -->
-<audio autoplay loop>
-  <source src="dil.mp3" type="audio/mpeg">
+<!-- Punjabi song (will play after interaction) -->
+<audio id="song" loop>
+  <!-- replace with your Punjabi song URL -->
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
 </audio>
 
-<img id="photo" src="her.jpg" alt="Arshiii">
+<div class="container">
+  <!-- Change image name later -->
+  <img id="photo" src="her.jpg" alt="Her photo">
 
-<h1>Arshiii 💕</h1>
-<h2>Will you be my Valentine?</h2>
+  <h1>Arshiii, will you be my girlfriend? 💕</h1>
 
-<div id="container">
-  <button id="yesBtn" onclick="sayYes()">Yes 💖</button>
-  <button id="noBtn" onmouseover="moveNo()">No 🙈</button>
+  <div class="buttons">
+    <button class="yes" onclick="yesClicked()">Yes 💖</button>
+    <button class="no" onmouseover="moveNo(this)">No 😢</button>
+  </div>
+
+  <div id="warmText">(getting warmer 🥵)</div>
 </div>
 
 <script>
-let yesSize = 20;
+let noCount = 0;
+let yesSize = 18;
 
-function moveNo() {
-  let x = Math.random() * 300;
-  let y = Math.random() * 200;
+const yesBtn = document.querySelector(".yes");
+const warmText = document.getElementById("warmText");
+const song = document.getElementById("song");
 
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
+function moveNo(btn) {
+  noCount++;
 
-  yesSize += 6;
+  // move NO button
+  const x = Math.random() * 300 - 150;
+  const y = Math.random() * 200 - 100;
+  btn.style.transform = `translate(${x}px, ${y}px)`;
+
+  // show warm text after 2 NOs
+  if (noCount >= 2) {
+    warmText.style.opacity = 1;
+  }
+
+  // grow YES button
+  yesSize += 5;
   yesBtn.style.fontSize = yesSize + "px";
+
+  // grow warm text with YES
+  warmText.style.fontSize = (yesSize - 6) + "px";
 }
 
-function sayYes() {
+function yesClicked() {
+  song.play();
+
   document.body.innerHTML = `
-    <h1 style="font-size:60px">Arshiii ❤️</h1>
-    <h2>You are my today, my tomorrow, my forever 💍</h2>
-    <p style="font-size:18px;max-width:600px;margin:auto">
-      Every smile of yours is my favourite view.  
-      Every moment with you is my favourite memory.  
-      I choose you. Always. 💖🥰
-    </p>
+    <div style="margin-top:80px;text-align:center;">
+      <h1>YAYYYY Arshiii 💍❤️</h1>
+      <h2>You just made me the happiest person alive 😍</h2>
+      <p>You are my peace, my home, my forever 💞</p>
+    </div>
   `;
 }
 
-/* Floating hearts */
+// Floating hearts
 setInterval(() => {
-  let heart = document.createElement("div");
+  const heart = document.createElement("div");
   heart.className = "heart";
   heart.innerHTML = "❤️";
-  heart.style.left = Math.random() * window.innerWidth + "px";
+  heart.style.left = Math.random() * 100 + "vw";
   document.body.appendChild(heart);
-
   setTimeout(() => heart.remove(), 6000);
-}, 700);
+}, 500);
 </script>
 
 </body>
 </html>
-  
