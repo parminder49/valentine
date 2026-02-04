@@ -1,44 +1,74 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>My Valentine</title>
+<meta charset="UTF-8">
+<title>My Valentine 💖</title>
+
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap');
+
 body {
+  margin: 0;
+  height: 100vh;
   text-align: center;
-  font-family: 'Georgia', serif;
-  background: linear-gradient(#ffb6c1, #ff69b4);
+  font-family: 'Poppins', sans-serif;
+  background:
+    linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+    url('her.jpg') center/cover no-repeat;
   color: white;
   overflow: hidden;
 }
 
-/* Her photo */
+/* Blur overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(8px);
+  z-index: -1;
+}
+
+/* Photo */
 #photo {
-  width: 180px;
-  height: 180px;
+  width: 190px;
+  height: 190px;
   border-radius: 50%;
   border: 5px solid white;
-  margin-top: 20px;
+  margin-top: 40px;
+  box-shadow: 0 0 30px rgba(255,255,255,0.7);
+}
+
+/* Headings */
+h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 48px;
+  margin: 20px 0 10px;
+}
+
+h2 {
+  font-weight: 300;
+  margin-bottom: 30px;
 }
 
 /* Buttons */
-#yesBtn {
+button {
   font-size: 20px;
-  padding: 15px 30px;
-  background: red;
-  color: white;
+  padding: 15px 35px;
+  border-radius: 30px;
   border: none;
-  border-radius: 15px;
+  cursor: pointer;
+}
+
+#yesBtn {
+  background: #ff3366;
+  color: white;
+  box-shadow: 0 0 20px rgba(255,51,102,0.8);
   transition: 0.3s;
 }
 
 #noBtn {
-  font-size: 20px;
-  padding: 15px 30px;
   background: white;
   color: black;
-  border: none;
-  border-radius: 15px;
   position: absolute;
 }
 
@@ -48,73 +78,76 @@ body {
   height: 300px;
 }
 
-/* Floating hearts */
+/* Hearts */
 .heart {
   position: absolute;
   bottom: -50px;
-  font-size: 30px;
-  animation: floatUp 5s linear infinite;
+  font-size: 28px;
+  animation: floatUp 6s linear infinite;
 }
 
 @keyframes floatUp {
-  0% { bottom: -50px; opacity: 1; }
-  100% { bottom: 100vh; opacity: 0; }
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-120vh); opacity: 0; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- Background music -->
+<!-- Punjabi song -->
 <audio autoplay loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+  <source src="dil.mp3" type="audio/mpeg">
 </audio>
 
-<img id="photo" src="her.jpg">
+<img id="photo" src="her.jpg" alt="Arshiii">
 
-<h1>Vania, will you be my girlfriend? 💞</h1>
+<h1>Arshiii 💕</h1>
+<h2>Will you be my Valentine?</h2>
 
 <div id="container">
-  <button id="yesBtn" onclick="sayYes()">Yes 💕</button>
-  <button id="noBtn" onmouseover="moveNo()">No 😢</button>
+  <button id="yesBtn" onclick="sayYes()">Yes 💖</button>
+  <button id="noBtn" onmouseover="moveNo()">No 🙈</button>
 </div>
 
 <script>
 let yesSize = 20;
 
-// Move No button + make Yes bigger
 function moveNo() {
   let x = Math.random() * 300;
   let y = Math.random() * 200;
 
-  document.getElementById("noBtn").style.left = x + "px";
-  document.getElementById("noBtn").style.top = y + "px";
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
 
-  yesSize += 10;
-  document.getElementById("yesBtn").style.fontSize = yesSize + "px";
+  yesSize += 6;
+  yesBtn.style.fontSize = yesSize + "px";
 }
 
-// Final romantic screen
 function sayYes() {
   document.body.innerHTML = `
-  <img src="her.jpg" style="width:180px;border-radius:50%;border:5px solid white;">
-  <h1>YAYYY Vania! 💍❤️</h1>
-  <h2>You just became my Valentine forever!</h2>
-  <p>You are my favourite person, my peace, my smile, my heart 💞</p>
+    <h1 style="font-size:60px">Arshiii ❤️</h1>
+    <h2>You are my today, my tomorrow, my forever 💍</h2>
+    <p style="font-size:18px;max-width:600px;margin:auto">
+      Every smile of yours is my favourite view.  
+      Every moment with you is my favourite memory.  
+      I choose you. Always. 💖
+    </p>
   `;
 }
 
-// Create floating hearts
-setInterval(function() {
+/* Floating hearts */
+setInterval(() => {
   let heart = document.createElement("div");
-  heart.innerHTML = "❤️";
   heart.className = "heart";
+  heart.innerHTML = "❤️";
   heart.style.left = Math.random() * window.innerWidth + "px";
   document.body.appendChild(heart);
 
-  setTimeout(() => heart.remove(), 5000);
-}, 800);
+  setTimeout(() => heart.remove(), 6000);
+}, 700);
 </script>
 
 </body>
 </html>
+  
